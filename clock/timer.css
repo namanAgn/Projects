@@ -1,44 +1,41 @@
-/* Background container for the time display */
 .background-color {
-    background-color: #2d2d2d; /* Dark background */
-    margin: 0 auto; /* Center the container */
-    max-width: 80%; /* Responsive width */
-    padding: 40px 20px; /* Adequate padding */
-    border-radius: 20px; /* Rounded corners */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
-    text-align: center; /* Center the content */
+    background-color: #2d2d2d;
+    margin: 0 auto; 
+    max-width: 80%;
+    padding: 40px 20px;
+    border-radius: 20px; 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
 }
 
-/* Styling for the time output */
 .js-output {
     font-family: 'Arial', sans-serif;
-    font-size: 100px; /* Large font size */
-    background-color: #777777; /* Light gray background */
+    font-size: 100px; 
+    background-color: #777777; 
     padding: 20px;
-    border-radius: 20px; /* Rounded corners */
+    border-radius: 20px;
     color: white;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Slight shadow for text */
-    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.5); /* Inner shadow for depth */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); 
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.5);
     display: inline-block;
-    width: 100%; /* Full width */
-    max-width: 90%; /* Limit the time block size */
+    width: 100%;
+    max-width: 90%; 
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .js-output {
-        font-size: 60px; /* Adjust font size for smaller screens */
+        font-size: 60px; 
     }
 
     .background-color {
-        max-width: 90%; /* Increase container width on smaller screens */
+        max-width: 90%; 
         padding: 20px;
     }
 }
 
 .center {
     display: flex;
-    justify-content: center; /* Horizontally center */
-    align-items: center; /* Vertically center */
-    height: 100vh; /* Full viewport height */
+    justify-content: center; 
+    align-items: center;
+    height: 100vh; 
 }
