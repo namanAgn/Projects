@@ -89,6 +89,10 @@ function handleCardClick(event) {
         if (matchesFound === cardsArray.length / 2) {
             statusDisplay.classList.add('victory');
             statusDisplay.innerHTML = 'You win!';
+            RetryButton = document.createElement('button') 
+            RetryButton.addEventListener('click', () => {
+                window.location.reload
+            }) 
         }
     }
 }
