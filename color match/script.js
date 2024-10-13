@@ -123,6 +123,10 @@ if (selectedTheme === 'blue') {
     setGreen();
     setColor(green_classes);
     updatePlayerButtons();
+} else {
+    setBlue();
+    setColor(blue_classes);
+    updatePlayerButtons();
 }
 
 // Update the event listeners for theme buttons
