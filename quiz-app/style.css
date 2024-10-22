@@ -68,7 +68,7 @@ p {
     margin: 10px;
     color: white;
     background-color: #5a5a5a;
-    width: 500px;
+    width: 10%;
     cursor: pointer;
     transition: all 0.25s ease;
 }
