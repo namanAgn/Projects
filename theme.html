@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --angle: 90deg;
+        }
+        body, html {
+            background: linear-gradient(var(--angle), #0158d2, #b700ff);
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            margin: 0; /* Added to remove default margin */
+            transition: background 0.5s; /* Smooth transition */
+            font-family: "Poppins";
+        }
+        h1 {
+            font-size: 75px;
+        }
+        h2 {
+            font-size: 50px;
+            margin: 15px;
+        }
+        p {
+            margin: 3px;
+            font-size: 25px;
+        }
+        .square {
+            background-color: white;
+            height: fit-content;
+            width: 90%;
+            margin-top: -60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+        }
+        .square-4,
+        .square-3,
+        .square-2 {
+            background-color: white;
+            height: 250px;
+            width: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 25px;
+            padding: 50px;
+        }
+        .square-4 {
+            align-items: start;
+            justify-content: center;
+        }
+        .grid-2,
+        .grid {
+            top: 200px;
+            position: absolute;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+        }
+        .grid-2 {
+            top: 600px;
+            max-width: 1450px;
+            max-height: 500px;
+        }
+        img {
+            width: 100%;
+            height: 400px;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="square">
+        <h1>Naman</h1>
+    </div>
+    <div class="grid">
+        <div class="square-2">
+            <h2 class="datetime-display"></h2>
+        </div>
+        <div class="square-3">
+            <h2 class="weather-info"></h2>
+        </div>
+        <div class="square-4">
+            <h2 class="apps">Apps:</h2>
+        </div>
+    </div>
+    <div class="grid-2">
+        <img src="images/1.jpg" class="img-1">
+        <img src="images/2.jpg" class="img-2">
+        <img src="images/3.jpg" class="img-3">
+    </div>
+    <script>
+        let angle = 90;
+
+        setInterval(() => {
+            angle += 1; // Increment the angle
+            if (angle >= 360) {
+                angle = 0; // Reset to 0 when reaching 360
+            }
+            document.documentElement.style.setProperty('--angle', angle + 'deg');
+        }); // Change the angle every 20 milliseconds
+
+        function updateDateTime() {
+            const now = new Date(); // Get the current date and time
+
+            // Get individual components
+            const day = now.toLocaleString('default', { weekday: 'long' }); // Get the day of the week
+            const date = now.toLocaleDateString(); // Get the date in locale format
+            const time = now.toLocaleTimeString(); // Get the time in locale format
+
+            // Display the date, day, and time
+            const datetimeDisplay = document.querySelector('.datetime-display');
+            datetimeDisplay.textContent = `${day}, ${date}, ${time}.`;
+        }
+
+        // Update the display initially and then every second
+        updateDateTime();
+        setInterval(updateDateTime, 1000); // Update every second
+
+        const apiKey = '67444647f5beb9a9aeb1b2fddfd84448'; // Replace with your OpenWeatherMap API key
+        const city = 'Zirakpur';
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const weatherInfo = document.querySelector('.weather-info');
+                const temperature = data.main.temp;
+                const weatherDescription = data.weather[0].description;
+                const humidity = data.main.humidity;
+                const windSpeed = data.wind.speed;
+
+                weatherInfo.innerHTML = `
+                    <h2>Weather:</h2>
+                    <p>Temperature: ${temperature} °C</p>
+                    <p>Weather: ${weatherDescription}</p>
+                    <p>Humidity: ${humidity}%</p>
+                    <p>Wind Speed: ${windSpeed} m/s</p>
+                `;
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+                document.getElementById('weather-info').textContent = 'Failed to load weather data.';
+            });
+    </script>
+</body>
+</html>
